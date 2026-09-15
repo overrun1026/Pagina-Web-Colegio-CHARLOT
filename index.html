@@ -51,6 +51,7 @@
             <a href="#propuesta" class="nav-link">Propuesta</a>
             <a href="#festival" class="nav-link">Festival</a>
             <a href="#admisiones" class="nav-link">Admisiones</a>
+            <a href="#galeria" class="nav-link">Galeria</a>
             <a href="#contacto" class="nav-link">Contacto</a>
 
             <a href="#admisiones" class="nav-button">
@@ -1270,7 +1271,7 @@
      GALERÍA
 ========================================================= -->
 
-<section class="section gallery-section">
+<section class="section gallery-section" id="galeria">
 
     <div class="container">
 
@@ -1466,6 +1467,8 @@
                         <div>
                             <span>Ubicación</span>
                             <strong>Zipaquirá, Cundinamarca</strong>
+                            <strong>Cra 10 A#17_37 el prado</strong>
+                            <strong>Calle 4# 4_187 Barandillas</strong>
                         </div>
 
                     </div>
@@ -1479,7 +1482,8 @@
 
                         <div>
                             <span>Teléfono</span>
-                            <strong>Información próximamente</strong>
+                            <strong>(+57) 311-240-2658</strong>
+                            <strong>(+57) 311-251-2031</strong>
                         </div>
 
                     </div>
@@ -1493,7 +1497,8 @@
 
                         <div>
                             <span>WhatsApp</span>
-                            <strong>Información próximamente</strong>
+                            <strong>(+57) 311-240-2658</strong>
+                            <strong>(+57) 311-251-2031</strong>
                         </div>
 
                     </div>
@@ -1507,7 +1512,7 @@
 
                         <div>
                             <span>Correo electrónico</span>
-                            <strong>Información próximamente</strong>
+                            <strong>colegiocharlot@gmail.com</strong>
                         </div>
 
                     </div>
@@ -1519,37 +1524,77 @@
 
             <div class="contact-form-wrapper">
 
-                <form class="contact-form" id="contactForm">
+                <form
+                    class="contact-form"
+                    id="contactForm"
+                    action="https://api.web3forms.com/submit"
+                    method="POST"
+                >
+
+                    <!-- Web3Forms -->
+                    <input
+                        type="hidden"
+                        name="access_key"
+                        value="b1e71ac4-6d57-4c70-a02b-f797af305ac8"
+                    >
+
+                    <!-- Asunto del correo -->
+                    <input
+                        type="hidden"
+                        name="subject"
+                        value="Nueva solicitud de información - Colegio Charlot"
+                    >
+
+                    <!-- Redireccionamiento después del envío -->
+                    <input
+                        type="hidden"
+                        name="redirect"
+                        value="https://web3forms.com/success"
+                    >
 
                     <h3>
                         Solicita información
                     </h3>
 
                     <p>
-                        Déjanos tus datos y nos pondremos en contacto contigo. Si no recibes respuesta pronto, puedes escribirnos directamente a nuestra línea de WhatsApp o enviarnos un correo electrónico.
-
+                        Déjanos tus datos y nos pondremos en contacto contigo.
+                        Si no recibes respuesta pronto, puedes escribirnos
+                        directamente a nuestra línea de WhatsApp o enviarnos
+                        un correo electrónico.
                     </p>
+
 
                     <div class="form-row">
 
                         <div class="form-group">
-                            <label for="name">Nombre</label>
+
+                            <label for="name">
+                                Nombre
+                            </label>
+
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
                                 placeholder="Tu nombre"
                                 required>
+
                         </div>
 
+
                         <div class="form-group">
-                            <label for="phone">Teléfono</label>
+
+                            <label for="phone">
+                                Teléfono
+                            </label>
+
                             <input
                                 type="tel"
                                 id="phone"
                                 name="phone"
                                 placeholder="Tu teléfono"
                                 required>
+
                         </div>
 
                     </div>
@@ -1557,7 +1602,9 @@
 
                     <div class="form-group">
 
-                        <label for="email">Correo electrónico</label>
+                        <label for="email">
+                            Correo electrónico
+                        </label>
 
                         <input
                             type="email"
@@ -1571,27 +1618,32 @@
 
                     <div class="form-group">
 
-                        <label for="subject">Motivo de contacto</label>
+                        <label for="contact-subject">
+                            Motivo de contacto
+                        </label>
 
-                        <select id="subject" name="subject">
+                        <select
+                            id="contact-subject"
+                            name="motivo_contacto"
+                            required>
 
                             <option value="">
                                 Selecciona una opción
                             </option>
 
-                            <option value="admisiones">
+                            <option value="Admisiones">
                                 Admisiones
                             </option>
 
-                            <option value="matricula">
+                            <option value="Matriculas">
                                 Matrículas
                             </option>
 
-                            <option value="informacion">
+                            <option value="Informacion general">
                                 Información general
                             </option>
 
-                            <option value="otro">
+                            <option value="Otro">
                                 Otro
                             </option>
 
@@ -1602,7 +1654,9 @@
 
                     <div class="form-group">
 
-                        <label for="message">Mensaje</label>
+                        <label for="message">
+                            Mensaje
+                        </label>
 
                         <textarea
                             id="message"
@@ -1614,7 +1668,9 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary form-submit">
+                    <button
+                        type="submit"
+                        class="btn btn-primary form-submit">
 
                         Enviar solicitud
 
@@ -1623,7 +1679,10 @@
                     </button>
 
 
-                    <div class="form-message" id="formMessage"></div>
+                    <div
+                        class="form-message"
+                        id="formMessage">
+                    </div>
 
                 </form>
 
@@ -1634,6 +1693,8 @@
     </div>
 
 </section>
+
+
 
 
 <!-- =========================================================
@@ -1762,12 +1823,12 @@
 
                 <span>
                     <i class="fa-solid fa-phone"></i>
-                    Información próximamente
+                    3112402658-3112512031
                 </span>
 
                 <span>
                     <i class="fa-solid fa-envelope"></i>
-                    Información próximamente
+                    colegiocharlot@gmail.com
                 </span>
 
             </div>

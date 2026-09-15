@@ -1,7 +1,9 @@
+
+
 # Colegio Charlot — Sitio Web Institucional
 
 <p align="center">
-  <img src="img/logo.jpeg" alt="Logo Colegio Charlot" width="140">
+  <img src="./img/logo.jpeg" alt="Logo Colegio Charlot" width="140">
 </p>
 
 <h3 align="center">
@@ -12,6 +14,16 @@
   Diseño web moderno, responsive y orientado a la presentación institucional,
   propuesta educativa, admisiones y contacto con la comunidad.
 </p>
+
+
+---
+
+## 🌐 Sitio web
+
+**Página oficial:**
+https://colegiocharlotzipaquira.com
+
+El sitio se encuentra publicado mediante **GitHub Pages**, utilizando un dominio personalizado administrado mediante **Cloudflare** y conexión segura mediante **HTTPS**.
 
 ---
 
@@ -70,7 +82,7 @@ Sección orientada a padres y acudientes interesados en conocer el proceso de in
 
 Formulario diseñado para permitir que los visitantes puedan solicitar información y establecer contacto con la institución.
 
-El formulario puede integrarse con un servicio externo de recepción de formularios, permitiendo mantener el proyecto como un sitio frontend estático sin necesidad de implementar un backend para esta funcionalidad.
+El formulario está integrado con **Web3Forms**, permitiendo mantener el proyecto como un sitio frontend estático sin necesidad de implementar un backend para esta funcionalidad.
 
 ### Diseño responsive
 
@@ -94,6 +106,9 @@ El sitio está preparado para adaptarse a diferentes tamaños de pantalla:
 | Google Fonts | Tipografías                        |
 | Git          | Control de versiones               |
 | GitHub       | Repositorio y gestión del proyecto |
+| GitHub Pages | Publicación del sitio              |
+| Cloudflare   | Gestión del dominio y DNS          |
+| Web3Forms    | Gestión del formulario de contacto |
 
 ---
 
@@ -115,6 +130,7 @@ La combinación busca mantener una identidad visual coherente en navegación, bo
 
 ```text
 colegio-charlot/
+
 │
 ├── index.html
 │
@@ -149,6 +165,7 @@ El sitio está organizado mediante diferentes secciones:
 
 ```text
 Inicio
+
  │
  ├── Nosotros
  │   ├── Información institucional
@@ -285,6 +302,8 @@ De esta manera, el sitio institucional puede convertirse posteriormente en la in
 
 Actualmente se encuentra implementada la interfaz institucional y las principales secciones informativas del sitio.
 
+El sitio cuenta con una versión publicada mediante GitHub Pages y un dominio personalizado.
+
 Las futuras funcionalidades dinámicas podrán incorporarse mediante servicios externos o mediante un backend propio, dependiendo de las necesidades de la institución.
 
 ---
@@ -313,7 +332,7 @@ Desarrollador de software enfocado en desarrollo web, programación y tecnologí
 
 GitHub:
 
-**https://github.com/overrun1026**
+https://github.com/overrun1026
 
 ---
 

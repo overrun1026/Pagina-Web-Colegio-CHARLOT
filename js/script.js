@@ -82,18 +82,35 @@ function handleScroll() {
 
     const scrollPosition = window.scrollY;
 
-    if (scrollPosition > 40) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
+    if (header) {
+
+        if (scrollPosition > 40) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
+
+        }
+
     }
+
 
     /* Back to top */
 
-    if (scrollPosition > 600) {
-        backToTop.classList.add("visible");
-    } else {
-        backToTop.classList.remove("visible");
+    if (backToTop) {
+
+        if (scrollPosition > 600) {
+
+            backToTop.classList.add("visible");
+
+        } else {
+
+            backToTop.classList.remove("visible");
+
+        }
+
     }
 
 }
@@ -112,8 +129,10 @@ if (backToTop) {
     backToTop.addEventListener("click", () => {
 
         window.scrollTo({
+
             top: 0,
             behavior: "smooth"
+
         });
 
     });
@@ -127,6 +146,7 @@ if (backToTop) {
 
 const sections = document.querySelectorAll("main section[id]");
 const navigationLinks = document.querySelectorAll(".nav-link");
+
 
 function updateActiveNavigation() {
 
@@ -150,7 +170,9 @@ function updateActiveNavigation() {
                 const href = link.getAttribute("href");
 
                 if (href === `#${sectionId}`) {
+
                     link.classList.add("active");
+
                 }
 
             });
@@ -219,9 +241,14 @@ revealElements.forEach((element, index) => {
 
 const accordionItems = document.querySelectorAll(".accordion-item");
 
+
 accordionItems.forEach(item => {
 
     const headerButton = item.querySelector(".accordion-header");
+
+    if (!headerButton) {
+        return;
+    }
 
     headerButton.addEventListener("click", () => {
 
@@ -240,7 +267,9 @@ accordionItems.forEach(item => {
         /* Abrir seleccionado */
 
         if (!isActive) {
+
             item.classList.add("active");
+
         }
 
     });
@@ -250,119 +279,158 @@ accordionItems.forEach(item => {
 
 /* ---------------------------------------------------------
    FORMULARIO
+   WEB3FORMS
 --------------------------------------------------------- */
 
 const contactForm = document.getElementById("contactForm");
 const formMessage = document.getElementById("formMessage");
 
+
 if (contactForm) {
 
-    contactForm.addEventListener("submit", event => {
+    contactForm.addEventListener("submit", async event => {
+
+        /* Evitar la recarga de la página */
 
         event.preventDefault();
 
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const subject = document.getElementById("subject").value;
-        const message = document.getElementById("message").value.trim();
+
+        /* Botón de envío */
+
+        const submitButton =
+            contactForm.querySelector(".form-submit");
 
 
-        /* Validación básica */
+        /* Desactivar botón mientras se envía */
 
-        if (
-            !name ||
-            !phone ||
-            !email ||
-            !subject ||
-            !message
-        ) {
+        if (submitButton) {
 
-            showFormMessage(
-                "Por favor completa todos los campos.",
-                false
-            );
+            submitButton.disabled = true;
 
-            return;
+            submitButton.style.opacity = "0.7";
+            submitButton.style.cursor = "not-allowed";
 
         }
 
 
-        /* Validación de email */
+        try {
 
-        const emailRegex =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            /* Obtener todos los datos del formulario */
 
-        if (!emailRegex.test(email)) {
+            const formData = new FormData(contactForm);
 
-            showFormMessage(
-                "Ingresa un correo electrónico válido.",
-                false
+
+            /* Enviar información a Web3Forms */
+
+            const response = await fetch(
+                "https://api.web3forms.com/submit",
+                {
+                    method: "POST",
+                    body: formData
+                }
             );
 
-            return;
+
+            const result = await response.json();
+
+
+            /* -------------------------------------------------
+               ENVÍO EXITOSO
+            ------------------------------------------------- */
+
+            if (result.success) {
+
+                /* Limpiar todos los campos */
+
+                contactForm.reset();
+
+
+                /* Mostrar mensaje */
+
+                if (formMessage) {
+
+                    formMessage.textContent =
+                        "Gracias. Tu solicitud ha sido enviada correctamente.";
+
+                    formMessage.style.display = "block";
+                    formMessage.style.background = "#edf9f2";
+                    formMessage.style.color = "#31835a";
+
+                }
+
+
+            } else {
+
+                /* -------------------------------------------------
+                   ERROR DE WEB3FORMS
+                ------------------------------------------------- */
+
+                if (formMessage) {
+
+                    formMessage.textContent =
+                        "No fue posible enviar la solicitud. Inténtalo nuevamente.";
+
+                    formMessage.style.display = "block";
+                    formMessage.style.background = "#fff0f0";
+                    formMessage.style.color = "#c74c4c";
+
+                }
+
+            }
+
+
+        } catch (error) {
+
+            /* -------------------------------------------------
+               ERROR DE CONEXIÓN
+            ------------------------------------------------- */
+
+            console.error(
+                "Error al enviar el formulario:",
+                error
+            );
+
+
+            if (formMessage) {
+
+                formMessage.textContent =
+                    "Ocurrió un error al enviar la solicitud. Verifica tu conexión e inténtalo nuevamente.";
+
+                formMessage.style.display = "block";
+                formMessage.style.background = "#fff0f0";
+                formMessage.style.color = "#c74c4c";
+
+            }
+
+        } finally {
+
+            /* Reactivar botón */
+
+            if (submitButton) {
+
+                submitButton.disabled = false;
+
+                submitButton.style.opacity = "";
+                submitButton.style.cursor = "";
+
+            }
+
+
+            /* Ocultar mensaje después de 5 segundos */
+
+            if (formMessage) {
+
+                setTimeout(() => {
+
+                    formMessage.style.display = "none";
+
+                }, 5000);
+
+            }
 
         }
-
-
-        /*
-         * Como la página es estática,
-         * actualmente no existe un backend.
-         *
-         * Aquí posteriormente se puede conectar:
-         *
-         * - Formspree
-         * - EmailJS
-         * - Web3Forms
-         * - API propia
-         * - WhatsApp
-         */
-
-        showFormMessage(
-            `Gracias, ${name}. Tu solicitud ha sido registrada en este formulario de demostración.`,
-            true
-        );
-
-
-        contactForm.reset();
 
     });
-
-}
-
-
-/* ---------------------------------------------------------
-   MENSAJE DEL FORMULARIO
---------------------------------------------------------- */
-
-function showFormMessage(message, success = true) {
-
-    if (!formMessage) {
-        return;
-    }
-
-    formMessage.textContent = message;
-
-    formMessage.style.display = "block";
-
-    if (success) {
-
-        formMessage.style.background = "#edf9f2";
-        formMessage.style.color = "#31835a";
-
-    } else {
-
-        formMessage.style.background = "#fff0f0";
-        formMessage.style.color = "#c74c4c";
-
-    }
-
-
-    setTimeout(() => {
-
-        formMessage.style.display = "none";
-
-    }, 5000);
 
 }
 
@@ -375,14 +443,22 @@ window.addEventListener("resize", () => {
 
     if (window.innerWidth > 800) {
 
-        nav.classList.remove("open");
+        if (nav) {
 
-        const icon = menuToggle.querySelector("i");
+            nav.classList.remove("open");
 
-        if (icon) {
+        }
 
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
+        if (menuToggle) {
+
+            const icon = menuToggle.querySelector("i");
+
+            if (icon) {
+
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            }
 
         }
 
